@@ -1,14 +1,6 @@
 
 import unittest
-from calc import calculateQuadraticEquationRoots
-
-
-def isanumber(a):
-    try:
-        float(repr(a))
-        return True
-    except:
-        return False
+from calc import isNumber, calculateQuadraticEquationRoots
 
 
 class Testing(unittest.TestCase):
@@ -24,7 +16,8 @@ class Testing(unittest.TestCase):
             [None, 1, 1],
             [1, 1, None],
             [1, None, 1],
-            [1, None, 'a']
+            [1, None, 'a'],
+            [0, 1, 1]
         ]
 
         for v in values:
@@ -34,11 +27,8 @@ class Testing(unittest.TestCase):
 
     def test_twin_root(self):
         values = [
-            [0, 0, -1],
-            [-1, 0, 0],
-            [0, 0, 0],
-            [1, 0, 0],
-            [0, 0, 1]
+            [-1, 0, 0, 0],
+            [1, 0, 0, 0]
         ]
 
         for v in values:
@@ -46,26 +36,21 @@ class Testing(unittest.TestCase):
             self.assertEqual(x1, x2)
             self.assertIsNotNone(x1) # becouse is equal, not need test x2
             self.assertIsNotInstance(x1, list)
-            self.assertTrue(isanumber(x1))
+            self.assertTrue(isNumber(x1))
+            self.assertEqual(x1, v[3])
 
     def test_real_root(self):
         values = [
-            [0, -1, -1],
-            [0, 1, -1],
-            [1, -1, -1],
-            [1, 0, -1],
-            [1, 1, -1],
-            [-1, -1, 0],
-            [-1, 1, 0],
-            [0, -1, 0],
-            [0, 1, 0],
-            [1, -1, 0],
-            [1, 1, 0],
-            [-1, -1, 1],
-            [-1, 0, 1],
-            [-1, 1, 1],
-            [0, -1, 1],
-            [0, 1, 1]
+            [1, -1, -1, (1-5**0.5)*0.5, (1+5**0.5)*0.5],
+            [1, 0, -1, -1, 1],
+            [1, 1, -1, (-1-5**0.5)*0.5, (-1+5**0.5)*0.5],
+            [-1, -1, 0, 0, -1],
+            [-1, 1, 0, 1, 0],
+            [1, -1, 0, 0, 1],
+            [1, 1, 0, -1, 0],
+            [-1, -1, 1, (-1+5**0.5)*0.5, (-1-5**0.5)*0.5],
+            [-1, 0, 1, 1, -1],
+            [-1, 1, 1, (1+5**0.5)*0.5, (1-5**0.5)*0.5]
         ]
 
         for v in values:
@@ -75,17 +60,19 @@ class Testing(unittest.TestCase):
             self.assertIsNotNone(x2)
             self.assertIsNotInstance(x1, list)
             self.assertIsNotInstance(x2, list)
-            self.assertTrue(isanumber(x1))
-            self.assertTrue(isanumber(x2))
+            self.assertTrue(isNumber(x1))
+            self.assertTrue(isNumber(x2))
+            self.assertEqual(x1, v[3])
+            self.assertEqual(x2, v[4])
 
     def test_complex_root(self):
         values = [
-            [-1, -1, -1],
-            [-1, 0, -1],
-            [-1, 1, -1],
-            [1, -1, 1],
-            [1, 0, 1],
-            [1, 1, 1]
+            [-1, -1, -1, [-0.5, (3**0.5)*-0.5], [-0.5, (3**0.5)*0.5]],
+            [-1, 0, -1, [0, -1], [0, 1]],
+            [-1, 1, -1, [0.5, (3**0.5)*-0.5], [0.5, (3**0.5)*0.5]],
+            [1, -1, 1, [0.5, (3**0.5)*0.5], [0.5, (3**0.5)*-0.5]],
+            [1, 0, 1, [0, 1], [0, -1]],
+            [1, 1, 1, [-0.5, (3**0.5)*0.5], [-0.5, (3**0.5)*-0.5]]
         ]
 
         for v in values:
@@ -93,11 +80,17 @@ class Testing(unittest.TestCase):
             self.assertIsInstance(x1, list)
             self.assertIsInstance(x2, list)
             self.assertFalse(x1[0] == x2[0] and x1[1] == x2[1])
-            self.assertTrue(isanumber(x1[0]))
-            self.assertTrue(isanumber(x2[0]))
-            self.assertTrue(isanumber(x1[1]))
-            self.assertTrue(isanumber(x2[1]))
+            self.assertTrue(isNumber(x1[0]))
+            self.assertTrue(isNumber(x2[0]))
+            self.assertTrue(isNumber(x1[1]))
+            self.assertTrue(isNumber(x2[1]))
+            self.assertEqual(x1[0], v[3][0])
+            self.assertEqual(x1[1], v[3][1])
+            self.assertEqual(x2[0], v[4][0])
+            self.assertEqual(x2[1], v[4][1])
 
 
 if __name__ == '__main__':
     unittest.main()
+
+
