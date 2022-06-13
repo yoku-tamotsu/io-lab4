@@ -34,8 +34,8 @@ class Testing(unittest.TestCase):
         for v in values:
             x1, x2 = calculateQuadraticEquationRoots(v[0], v[1], v[2])
             self.assertEqual(x1, x2)
-            self.assertIsNotNone(x1) # becouse is equal, not need test x2
-            self.assertIsNotInstance(x1, list)
+            self.assertIsNotNone(x1)
+            self.assertNotIsInstance(x1, list)
             self.assertTrue(isNumber(x1))
             self.assertEqual(x1, v[3])
 
@@ -58,12 +58,12 @@ class Testing(unittest.TestCase):
             self.assertNotEqual(x1, x2)
             self.assertIsNotNone(x1)
             self.assertIsNotNone(x2)
-            self.assertIsNotInstance(x1, list)
-            self.assertIsNotInstance(x2, list)
+            self.assertNotIsInstance(x1, list)
+            self.assertNotIsInstance(x2, list)
             self.assertTrue(isNumber(x1))
             self.assertTrue(isNumber(x2))
-            self.assertEqual(x1, v[3])
-            self.assertEqual(x2, v[4])
+            self.assertEqual(x1, v[4])
+            self.assertEqual(x2, v[3])
 
     def test_complex_root(self):
         values = [

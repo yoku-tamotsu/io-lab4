@@ -8,9 +8,6 @@ def isNumber(a):
 
 
 def calculateQuadraticEquationRoots(a, b, c):
-    if not a or not b or not c:
-        return None, None
-
     if not isNumber(a) or not isNumber(b) or not isNumber(c):
         return None, None
 
