@@ -1,1 +1,1 @@
-Repozytorium na potrzeby Laboratorium z przedmiotu Inzynieria Oprogramowania
+Repozytorium na potrzeby laboratorium z przedmiotu Inżynieria Oprogramowania
